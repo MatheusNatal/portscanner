@@ -13,13 +13,13 @@ Certifique-se de ter o Python 3 instalado. Se não, você pode instalá-lo usand
     sudo apt-get install python3
 
 ### Faça o download do código-fonte deste repositório ou clone-o:
-    git clone https://github.com/seu-usuario/Port-Scanner-Python.git
+    git clone https://github.com/MatheusNatal/portscanner
 
 ### Navegue até o diretório do projeto:
-    cd Port-Scanner-Python
+    cd PortScanner
 
 ### Execute o aplicativo:
-    python3 port_scanner.py
+    python3 portscanner.py
 
 ## No Windows
 Instale o Python 3 em python.org.
@@ -29,7 +29,7 @@ Faça o download do código-fonte deste repositório.
 ### Navegue até o diretório do projeto no Prompt de Comando (cmd).
 
 #### Execute o aplicativo:
-    python port_scanner.py
+    python portscanner.py
 
 ## Análise Profunda
 Este Port Scanner é uma solução eficiente para verificar a disponibilidade de portas em um host. Ele oferece várias características notáveis:
