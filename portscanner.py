@@ -37,7 +37,7 @@ def verificar_portas():
         except ValueError:
             results_queue.put(f'Porta inválida: {porta}\n')
 
-    # Crie e inicie uma thread para cada porta
+    # thread para cada porta
     threads = []
     for porta_str in portas:
         try:
@@ -49,7 +49,6 @@ def verificar_portas():
         except ValueError:
             resultado.insert(tk.END, f'Porta inválida: {porta_str}\n')
 
-    # Aguarde todas as threads terminarem
     for thread in threads:
         thread.join()
 
@@ -65,11 +64,11 @@ def limpar_resultados():
     resultado.config(state=tk.DISABLED)
 
 def habilitar_portas_personalizadas():
-    portas_entry.config(state=tk.NORMAL, bg='white')  # Altere a cor de fundo para branco
+    portas_entry.config(state=tk.NORMAL, bg='white')
     portas_entry.delete(0, tk.END)
 
 def desabilitar_portas_personalizadas():
-    portas_entry.config(state=tk.DISABLED, bg='#2B2B2B')  # Restaure a cor de fundo cinza
+    portas_entry.config(state=tk.DISABLED, bg='#2B2B2B')
 
 def mostrar_info_portas():
     info_window = tk.Toplevel(root)
@@ -88,24 +87,22 @@ def mostrar_info_portas():
 def abrir_link(event):
     webbrowser.open("https://github.com/MatheusNatal")
 
-# Cria a janela principal
 root = tk.Tk()
 root.title("PortScanner v1.0")
 
-# Defina as configurações de cores
+
 root.configure(bg='#2B2B2B')  # Cor de fundo da janela
 
 # Desativar redimensionamento
-root.resizable(False, False)  # Isso desativa a capacidade de redimensionar a janela
+root.resizable(False, False)
 
 # Definir as dimensões da janela
-root.geometry("450x300")  # Define a largura e altura da janela
+root.geometry("450x300") 
 
 # Abre o arquivo .ico com o Pillow e o converte para um formato suportado pelo Tkinter
 icon_image = Image.open('icon.ico')
 icon_photo = ImageTk.PhotoImage(icon_image)
 
-# Define o ícone da aplicação
 root.iconphoto(True, icon_photo)
 
 # Define a variável porta_option no escopo global
@@ -124,14 +121,14 @@ custom_ports_radio.grid(row=2, column=0, columnspan=2, padx=10, pady=1, sticky='
 portas_label = tk.Label(root, text="Portas (separadas por vírgula):", bg='#2B2B2B', fg='white', justify='left')
 portas_label.grid(row=3, column=0, columnspan=2, padx=10, pady=1, sticky='w')
 
-portas_entry = tk.Entry(root, state=tk.DISABLED, bg='#4A4A4A')  # Comece com a cor de fundo cinza
+portas_entry = tk.Entry(root, state=tk.DISABLED, bg='#4A4A4A')
 portas_entry.grid(row=4, column=0, columnspan=2, padx=10, pady=1, sticky='w')
 
 verificar_button = tk.Button(root, text="Verificar Portas", command=verificar_portas, bg='#2B2B2B', fg='white')
 verificar_button.grid(row=5, column=0, columnspan=2, padx=10, pady=2, sticky='w')
 
 limpar_button = tk.Button(root, text="Limpar Resultados", command=limpar_resultados, bg='#2B2B2B', fg='white')
-limpar_button.grid(row=2, column=0, columnspan=2, padx=10, pady=1, sticky='ne')  # Coloca o botão no canto superior direito
+limpar_button.grid(row=2, column=0, columnspan=2, padx=10, pady=1, sticky='ne')
 
 info_button = tk.Button(root, text="Informações sobre Portas", command=mostrar_info_portas, bg='#2B2B2B', fg='white')
 info_button.grid(row=1, column=0, columnspan=2, padx=10, pady=1, sticky='e')
@@ -143,18 +140,14 @@ assinatura = tk.Label(root, text="x-mas", bg='#2B2B2B', fg='white', justify='rig
 assinatura.grid(row=10, column=0, columnspan=2, padx=10, pady=1, sticky='e')
 assinatura.bind("<Button-1>", abrir_link)
 
-# Crie um estilo de fonte apenas para o texto do link com sublinhado
 fonte_link = tkFont.Font(assinatura, assinatura.cget("font"))
 fonte_link.configure(underline=True)
 assinatura.config(font=fonte_link)
 
-# Use um widget de rolagem para permitir a rolagem no campo de resultados
 resultado = scrolledtext.ScrolledText(root, state=tk.DISABLED, bg='#4A4A4A', fg='white')
 resultado.grid(row=9, column=0, columnspan=2, padx=10, pady=2, sticky="nsew")
 
-# Configurar a expansão da coluna e da linha para o campo de resultado
 root.grid_rowconfigure(9, weight=1)
 root.grid_columnconfigure(0, weight=1)
 
-# Inicie a interface gráfica
 root.mainloop()
