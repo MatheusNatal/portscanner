@@ -1,53 +1,72 @@
-# PortScanner
- 
-Port Scanner em Python
-## Introdução
-Este é um Port Scanner em Python, uma ferramenta que verifica a disponibilidade de portas em um host específico. Ele oferece uma interface gráfica amigável para facilitar a verificação de portas em sistemas Linux e Windows. Além disso, a ferramenta suporta a verificação de "Portas Principais" comuns, como HTTP (80) e HTTPS (443), e também permite especificar "Portas Personalizadas".
+# ⚡ PortScanner CLI
 
-## Instalação
+> Ferramenta de linha de comando (CLI) leve, de alto desempenho e multithread para escaneamento e diagnóstico de portas TCP.
 
-### No Linux
-Certifique-se de ter o Python 3 instalado. Se não, você pode instalá-lo usando o gerenciador de pacotes do seu sistema, por exemplo, no Ubuntu:
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Type](https://img.shields.io/badge/Interface-CLI-orange)
 
-    sudo apt-get update
-    sudo apt-get install python3
+## 📌 Visão Geral
 
-### Faça o download do código-fonte deste repositório ou clone-o:
-    git clone https://github.com/MatheusNatal/portscanner
+O **PortScanner CLI** é um utilitário desenvolvido em Python projetado para verificar a disponibilidade de portas TCP em redes locais ou remotas. A ferramenta utiliza um pool de threads gerenciado (`ThreadPoolExecutor`) para realizar varreduras paralelas rápidas e eficientes, fornecendo resolução de nomes de serviço e suporte a faixas de portas (*ranges*).
 
-### Navegue até o diretório do projeto:
-    cd PortScanner
+### ✨ Principais Recursos
 
-### Execute o aplicativo:
-    python3 portscanner.py
+- **Varredura Ultrarrápida (Multithreaded):** Utiliza `concurrent.futures.ThreadPoolExecutor` para executar requisições simultâneas sem congelar o sistema.
+- **Resolução Automática de Serviços:** Identifica o protocolo associado a portas abertas conhecidas (ex: `80 -> http`, `22 -> ssh`).
+- **Flexibilidade de Alvos:** Aceita endereços IP (`192.168.1.1`) ou nomes de domínio (`scanme.nmap.org`).
+- **Suporte a Faixas de Portas:** Permite especificar portas individuais (ex: `80,443`) ou faixas completas (ex: `20-1000`).
+- **Tratamento de Interrupções:** Encerramento limpo e seguro via `Ctrl+C` sem lançar exceções não tratadas no terminal.
+- **Sem Dependências Externas:** Desenvolvido exclusivamente com a biblioteca padrão do Python (`socket`, `argparse`, `concurrent.futures`).
 
-## No Windows
-Instale o Python 3 em python.org.
+---
 
-Faça o download do código-fonte deste repositório.
+## 🚀 Instalação
 
-### Navegue até o diretório do projeto no Prompt de Comando (cmd).
+### Pré-requisitos
+Apenas o **Python 3.8+** instalado na sua máquina (Windows, Linux ou macOS).
 
-#### Execute o aplicativo:
-    python portscanner.py
+```bash
+# Clone o repositório
+git clone https://github.com/MatheusNatal/portscanner.git
 
-## Análise Profunda
-Este Port Scanner é uma solução eficiente para verificar a disponibilidade de portas em um host. Ele oferece várias características notáveis:
+# Acesse o diretório do projeto
+cd portscanner
+``` 
 
-* Interface Gráfica Amigável: A interface gráfica (GUI) simplifica a verificação de portas e torna o processo acessível mesmo para iniciantes.
+## 💻 Como Usar
+### Execute o script diretamente pelo terminal:
 
-* Verificação Paralela: A implementação de threads permite verificar várias portas simultaneamente, o que economiza tempo.
+1. Escaneamento Padrão (Localhost)
+Escaneia as portas principais (21, 22, 25, 80, 443, 8080, 8443) no host local:
+```bash
+python portscanner.py
+```
+2. Escanear um Alvo Específico
+```bash
+python portscanner.py -t scanme.nmap.org
+```
+3. Especificar Portas Personalizadas ou Faixas (Ranges)
+```bash
+# Portas específicas
+python portscanner.py -t 192.168.1.1 -p 80,443,8080
 
-* Portas Principais e Personalizadas: A opção de verificar "Portas Principais" comuns ou especificar "Portas Personalizadas" oferece flexibilidade.
+# Faixa de portas (1 a 1024)
+python portscanner.py -t 192.168.1.1 -p 1-1024
+```
+---
+## ⚙️ Opções de Linha de Comando (CLI)
 
-* Informações Sobre Portas: O aplicativo fornece informações úteis sobre as portas principais, ajudando os usuários a compreender a finalidade de cada porta.
+| Opção | Nome Longo | Descrição |
+| :--- | :--- | :--- |
+| `-h` | `--help` | Exibe a mensagem de ajuda e instruções de uso. |
+| `-t` | `--target` | IP ou hostname alvo (padrão: localhost). |
+| `-p` | `--ports` | Portas a escanear (ex: 80,443 ou 20-1000). |
+| `-w` | `--workers` | Número de threads simultâneas (padrão: 100). |
+| | `--timeout` | Tempo limite por conexão em segundos (padrão: 1.0s). |
 
-Este código pode ser uma ferramenta valiosa para administradores de rede e entusiastas de segurança cibernética, permitindo verificar a segurança de hosts específicos.
+---
+## 📄 Licença
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo LICENSE para obter mais detalhes.
 
-Contribua
-Sinta-se à vontade para contribuir com melhorias ou correções de bugs. Crie um fork deste repositório, faça as alterações e envie um pull request. Estamos ansiosos para ver suas contribuições!
-
-Licença
-Este projeto está sob a Licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
-
-Apreciamos seu interesse neste Port Scanner em Python e esperamos que seja útil para seus projetos e aprendizado.
+Desenvolvido por Matheus Natal.
